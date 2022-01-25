@@ -15,6 +15,7 @@
 // </copyright>
 
 using OpenTelemetry.Contrib.Instrumentation.EventCounters.SystemRuntime;
+using OpenTelemetry.Metrics;
 using Xunit;
 
 namespace OpenTelemetry.Contrib.Instrumentation.EventCounters.Tests
@@ -32,7 +33,33 @@ namespace OpenTelemetry.Contrib.Instrumentation.EventCounters.Tests
             builder.WithAll();
 
             Assert.NotEmpty(options.Sources);
-            Assert.Equal(options.Sources[0].EventCounters.Count, methodCounts - 2);
+            Assert.Equal(methodCounts - 2, options.Sources[0].EventCounters.Count);
+        }
+
+        [Fact]
+        public void WithCounters_Adds_Unknown_Counters()
+        {
+            var options = new EventCountersOptions();
+            var builder = new SystemRuntimeBuilder(options);
+            builder.WithCounters("firstCounter", "secondCounter");
+
+            Assert.NotEmpty(options.Sources);
+            Assert.Equal(2, options.Sources[0].EventCounters.Count);
+
+            Assert.Equal("firstCounter", options.Sources[0].EventCounters[0].Name);
+            Assert.Null(options.Sources[0].EventCounters[0].Description);
+            Assert.Equal(MetricType.LongSum, options.Sources[0].EventCounters[0].Type);
+            Assert.Null(options.Sources[0].EventCounters[0].MetricName);
+        }
+
+        [Fact]
+        public void Extension_Adds_EventSource()
+        {
+            var options = new EventCountersOptions();
+            options.AddRuntime();
+
+            Assert.NotEmpty(options.Sources);
+            Assert.Equal(KnownEventSources.SystemRuntime, options.Sources[0].EventSourceName);
         }
     }
 }

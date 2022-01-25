@@ -1,4 +1,4 @@
-﻿// <copyright file="AspNetCoreBuilderTests.cs" company="OpenTelemetry Authors">
+﻿// <copyright file="GrpcServerBuilderTests.cs" company="OpenTelemetry Authors">
 // Copyright The OpenTelemetry Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,22 +14,22 @@
 // limitations under the License.
 // </copyright>
 
-using OpenTelemetry.Contrib.Instrumentation.EventCounters.AspNetCore;
+using OpenTelemetry.Contrib.Instrumentation.EventCounters.GrpcServer;
 using OpenTelemetry.Metrics;
 using Xunit;
 
 namespace OpenTelemetry.Contrib.Instrumentation.EventCounters.Tests
 {
-    public class AspNetCoreBuilderTests
+    public class GrpcServerBuilderTests
     {
         [Fact]
         public void WithAll_Adds_All_Known_Counter()
         {
             // retrieve all interface methods
-            var methodCounts = typeof(IAspNetCoreBuilder).GetMethods().Length;
+            var methodCounts = typeof(IGrpcServerBuilder).GetMethods().Length;
 
             var options = new EventCountersOptions();
-            var builder = new AspNetCoreBuilder(options);
+            var builder = new GrpcServerBuilder(options);
             builder.WithAll();
 
             Assert.NotEmpty(options.Sources);
@@ -40,7 +40,7 @@ namespace OpenTelemetry.Contrib.Instrumentation.EventCounters.Tests
         public void WithCounters_Adds_Unknown_Counters()
         {
             var options = new EventCountersOptions();
-            var builder = new AspNetCoreBuilder(options);
+            var builder = new GrpcServerBuilder(options);
             builder.WithCounters("firstCounter", "secondCounter");
 
             Assert.NotEmpty(options.Sources);
@@ -56,10 +56,10 @@ namespace OpenTelemetry.Contrib.Instrumentation.EventCounters.Tests
         public void Extension_Adds_EventSource()
         {
             var options = new EventCountersOptions();
-            options.AddAspNetCore();
+            options.AddGrcpServer();
 
             Assert.NotEmpty(options.Sources);
-            Assert.Equal(KnownEventSources.MicrosoftAspNetCoreHosting, options.Sources[0].EventSourceName);
+            Assert.Equal(KnownEventSources.GrpcAspNetCoreServer, options.Sources[0].EventSourceName);
         }
     }
 }

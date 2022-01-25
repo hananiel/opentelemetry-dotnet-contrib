@@ -21,6 +21,7 @@ namespace OpenTelemetry.Contrib.Instrumentation.EventCounters
         public const string SystemRuntime = "System.Runtime";
         public const string MicrosoftAspNetCoreHosting = "Microsoft.AspNetCore.Hosting";
         public const string GrpcAspNetCoreServer = "Grpc.AspNetCore.Server";
+        public const string GrpcNetClient = "Grpc.Net.Client";
         public const string WindowsDotNetRuntime = "Microsoft-Windows-DotNETRuntime";
     }
 }

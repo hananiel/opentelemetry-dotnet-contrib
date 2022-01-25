@@ -1,4 +1,4 @@
-﻿// <copyright file="GrpcOptionsExtensions.cs" company="OpenTelemetry Authors">
+﻿// <copyright file="GrpcServerOptionsExtensions.cs" company="OpenTelemetry Authors">
 // Copyright The OpenTelemetry Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,23 +15,23 @@
 // </copyright>
 
 using OpenTelemetry.Contrib.Instrumentation.EventCounters;
-using OpenTelemetry.Contrib.Instrumentation.EventCounters.Grpc;
+using OpenTelemetry.Contrib.Instrumentation.EventCounters.GrpcServer;
 
 namespace OpenTelemetry.Metrics
 {
     /// <summary>
     /// Extension methods for the event counters options.
     /// </summary>
-    public static class GrpcOptionsExtensions
+    public static class GrpcServerOptionsExtensions
     {
         /// <summary>
-        /// Adds the Grpc event source.
+        /// Adds the Grpc Server event source.
         /// </summary>
         /// <param name="options">The options to add the event source to.</param>
         /// <returns>The options instance.</returns>
-        public static IGrpcBuilder AddGrcpServer(this EventCountersOptions options)
+        public static IGrpcServerBuilder AddGrcpServer(this EventCountersOptions options)
         {
-            return new GrpcBuilder(options);
+            return new GrpcServerBuilder(options);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿// <copyright file="IGrpcBuilder.cs" company="OpenTelemetry Authors">
+﻿// <copyright file="GrpcClientOptionsExtensions.cs" company="OpenTelemetry Authors">
 // Copyright The OpenTelemetry Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,18 +14,24 @@
 // limitations under the License.
 // </copyright>
 
-namespace OpenTelemetry.Contrib.Instrumentation.EventCounters.Grpc
+using OpenTelemetry.Contrib.Instrumentation.EventCounters;
+using OpenTelemetry.Contrib.Instrumentation.EventCounters.GrpcClient;
+
+namespace OpenTelemetry.Metrics
 {
     /// <summary>
-    /// Event source option builder for Grpc event counters.
+    /// Extension methods for the event counters options.
     /// </summary>
-    public interface IGrpcBuilder
+    public static class GrpcClientOptionsExtensions
     {
         /// <summary>
-        /// Add several event counters to the options.
+        /// Adds the Grpc client event source.
         /// </summary>
-        /// <param name="counterNames">Name of the counters to listen to.</param>
-        /// <returns>The builder instance to define event counters.</returns>
-        IGrpcBuilder WithCounters(params string[] counterNames);
+        /// <param name="options">The options to add the event source to.</param>
+        /// <returns>The options instance.</returns>
+        public static IGrpcClientBuilder AddGrcpClient(this EventCountersOptions options)
+        {
+            return new GrpcClientBuilder(options);
+        }
     }
 }
