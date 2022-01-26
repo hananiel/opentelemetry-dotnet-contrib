@@ -54,7 +54,7 @@ public class Program
             .With(
             "connections-per-second",
             "The number of connections per update interval to the web server",
-            MetricType.LongSum);
+            MetricType.LongSum));
                 })
                 .AddConsoleExporter()
                 .Build();
