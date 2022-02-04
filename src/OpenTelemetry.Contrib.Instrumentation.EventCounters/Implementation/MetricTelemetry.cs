@@ -32,14 +32,9 @@ namespace OpenTelemetry.Contrib.Instrumentation.EventCounters.Implementation
         public string EventSource { get; set; }
 
         /// <summary>
-        /// Gets or sets sum of the values of the metric samples.
+        /// Gets or sets the values of the metric.
         /// </summary>
-        public double Sum { get; set; }
-
-        /// <summary>
-        /// Gets or sets the number of values in the sample set.
-        /// </summary>
-        public int? Count { get; set; }
+        public double Value { get; set; }
 
         /// <summary>
         /// Gets or sets the display name.
@@ -49,6 +44,6 @@ namespace OpenTelemetry.Contrib.Instrumentation.EventCounters.Implementation
         /// <summary>
         /// Gets or sets the instrumentation type.
         /// </summary>
-        public InstrumentationType Type { get; set; } = InstrumentationType.LongCounter;
+        public InstrumentationType Type { get; set; } = InstrumentationType.Counter;
     }
 }
